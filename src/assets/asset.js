@@ -24,4 +24,30 @@ export const initialProjects = [
         ],
         progress: 0,
     },
+    {
+        id: "p3",
+        title: "Learning Vietnamese",
+        createdAt: "2024-12-29",
+        deadline: "2025-01-15",
+        description:
+            "Learn React from the group up. Start with the basics, finish with advanced knowledge.",
+        tasks: [
+            { id: "t1", title: "Learn advanced concepts", done: false },
+            { id: "t2", title: "Learn the basics", done: false },
+        ],
+        progress: 20, // Percentage
+    },
+    {
+        id: "p4",
+        title: "Learning Chinese",
+        createdAt: "2024-12-29",
+        deadline: "2025-01-15",
+        description:
+            "Learn React from the group up. Start with the basics, finish with advanced knowledge.",
+        tasks: [
+            { id: "t1", title: "Learn advanced concepts", done: false },
+            { id: "t2", title: "Learn the basics", done: false },
+        ],
+        progress: 20, // Percentage
+    },
 ];
