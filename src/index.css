@@ -1,0 +1,31 @@
+/* 1. Import fonts từ Google Fonts:
+   - Tải font “Outfit” với các weight từ 100 đến 900.
+   - Tải font “Playfair” với cả normal/italic và weight mở rộng.
+   (display=swap giúp trình duyệt hiển thị font thay thế trước khi tải xong) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+
+@import "tailwindcss";
+
+
+
+/* 3. Khai báo CSS variables toàn cục */
+:root {
+    --color-primary: #2563EB;
+    --color-secondary: #FBBF24;
+    font-size: 16px;
+}
+
+
+/* 2. Đặt font mặc định cho toàn bộ phần tử trên trang
+   - Selector * nghĩa là "mọi phần tử"
+   - Mặc định sử dụng font-family 'Outfit', fallback sang sans-serif nếu không tải được */
+* {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* 3. Class .font-playfair
+   - Khi áp dụng class này lên thẻ HTML, nó sẽ override font mặc định
+   - Sử dụng font-family 'Playfair', fallback sang serif nếu không tải được */
+.font-playfair {
+    font-family: 'Playfair' !important;
+}
