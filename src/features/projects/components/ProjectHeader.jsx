@@ -9,7 +9,7 @@ export default function ProjectHeader({ selectedProject, handleDeleteProject }) 
                 </div>
 
                 <button
-                    onClick={handleDeleteProject}
+                    onClick={() => handleDeleteProject(selectedProject.id)}
                     className="text-red-500 hover:underline text-sm"
                 >
                     Delete

@@ -1,4 +1,4 @@
-export default function ProgressBar({ progress }) {
+export default function ProgressBar({ progress = 0 }) {
     return (
         <>
             <div className="bg-gray-200 h-2 rounded mt-4">

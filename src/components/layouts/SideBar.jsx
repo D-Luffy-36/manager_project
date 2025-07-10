@@ -1,30 +1,48 @@
 import AddButton from "../ui/AddButton";
+import { useState } from "react";
+import { assets } from "../../assets/asset";
 
-export default function Sidebar({ projects, idSelectedProject, onAddProject, onSelectProject }) {
+export default function Sidebar({
+    projects,
+    idSelectedProject,
+    onAddProject,
+    onSelectProject,
+}) {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     return (
-        <aside className="bg-gray-900 text-white p-4 overflow-y-auto hidden md:block ">
-            <h2 className="text-xl font-bold mb-4">YOUR PROJECTS</h2>
-
-            {/* <button
-                onClick={onAddProject}
-                className="w-full bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded mb-6"
+        <>
+            <aside
+                className={`
+                bg-gray-900 text-white p-4 overflow-y-auto
+                ${isSidebarOpen ? "block" : "hidden"}
+                md:block
+        `}
             >
-                + Add Project
-            </button> */}
-            <AddButton tittle={"+ add project"} onClick={onAddProject} />
+                <div className="grid grid-cols-[auto_auto] justify-center items-center gap-2 mb-4">
+                    <h2 className="text-xl font-bold">YOUR PROJECTS</h2>
+                    <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                        <img src={assets.alignJustifyIcon} alt="" className="w-5 h-5 invert" />
+                    </button>
+                </div>
 
-            <ul className="space-y-2">
-                {projects.map((project) => (
-                    <li
-                        key={project.id}
-                        onClick={() => onSelectProject(project.id)}
-                        className={`p-2 rounded cursor-pointer hover:bg-gray-800 ${idSelectedProject === project.id ? "bg-blue-600 text-white" : ""
-                            }`}
-                    >
-                        {project.title}
-                    </li>
-                ))}
-            </ul>
-        </aside>
+                <AddButton tittle={"+ add project"} onClick={onAddProject} />
+
+                <ul className="space-y-2">
+                    {projects.map((project) => (
+                        <li
+                            key={project.id}
+                            onClick={() => onSelectProject(project.id)}
+                            className={`p-2 rounded cursor-pointer hover:bg-gray-800 ${idSelectedProject === project.id
+                                ? "bg-blue-600 text-white"
+                                : ""
+                                }`}
+                        >
+                            {project.title}
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </>
     );
 }

@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskList from "../task/components/TaskList";
-import ProjectHeader from "../../components/layouts/ProjectHeader";
+import ProjectHeader from "../projects/components/ProjectHeader"
 import ProgressBar from "../../components/ui/ProcessBar";
+import AddTaskForm from "../task/components/AddTaskForm";
+import { calculateProgress } from "../../assets/asset"
 
+export default function MainContentSection({
+    selectedProject,
+    handleDeleteProject, handleAddTask,
+    handleClearTask, handleToggleTaskDone
+}) {
+    const [process, setProcess] = useState();
 
-export default function MainContentSection({ selectedProject, handleDeleteProject, handleAddTask, handleClearTask, handleToggleTaskDone }) {
-    const [newTask, setNewTask] = useState("");
+    useEffect(() => {
+        if (selectedProject?.tasks) {
+            console.log("Tasks:", selectedProject.tasks);
+            setProcess(calculateProgress(selectedProject.tasks));
+        }
+    }, [selectedProject]); // ✅ chỉ phụ thuộc vào selectedProject
+
     return (
         <>
             {/* Main Content */}
@@ -17,28 +30,13 @@ export default function MainContentSection({ selectedProject, handleDeleteProjec
                             <ProjectHeader selectedProject={selectedProject} handleDeleteProject={handleDeleteProject} />
 
                             {/* Tasks Section */}
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-lg font-semibold text-black">Tasks</h2>
-                                <button
-                                    onClick={handleAddTask}
-                                    className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
-                                >
-                                    Add Task
-                                </button>
-                            </div>
+                            <AddTaskForm projectId={selectedProject.id} onAdd={handleAddTask} />
 
-                            <input
-                                type="text"
-                                value={newTask}
-                                onChange={(e) => setNewTask(e.target.value)}
-                                placeholder="New task..."
-                                className="border border-gray-300 px-2 py-1 rounded w-full mb-4 text-black"
-                            />
-
+                            {/*Tasks List */}
                             <TaskList taskList={selectedProject.tasks} handleClearTask={handleClearTask} handleToggleTaskDone={handleToggleTaskDone} />
 
                             {/* Progress Bar */}
-                            <ProgressBar progress={selectedProject.progress} />
+                            <ProgressBar progress={process} />
 
                             {/* Watermark */}
                             <p className="text-xs text-gray-400 mt-4 text-center">

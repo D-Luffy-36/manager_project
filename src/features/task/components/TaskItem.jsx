@@ -6,7 +6,7 @@ export default function TaskItem({ taskItem, handleClearTask, handleToggleTaskDo
                     {/* Optional: Checkbox to mark as done */}
                     <input
                         type="checkbox"
-                        checked={task.done} z
+                        checked={taskItem.done}
                         onChange={() => handleToggleTaskDone(taskItem.id)} // bạn sẽ thêm hàm này
                         className="accent-blue-600"
                     />

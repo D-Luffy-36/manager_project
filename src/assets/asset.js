@@ -1,3 +1,15 @@
+import alignJustifyIcon from "./align-justify.svg";
+
+export const assets = {
+    alignJustifyIcon
+}
+
+export function calculateProgress(tasks) {
+    if (!tasks || tasks.length === 0) return 0;
+    const doneCount = tasks.filter((task) => task.done).length;
+    return Math.round((doneCount / tasks.length) * 100);
+}
+
 export const initialProjects = [
     {
         id: "p1",
@@ -5,12 +17,11 @@ export const initialProjects = [
         createdAt: "2024-12-29",
         deadline: "2025-01-15",
         description:
-            "Learn React from the group up. Start with the basics, finish with advanced knowledge.",
+            "Learn React from the ground up. Start with the basics, finish with advanced knowledge.",
         tasks: [
-            { id: "t1", title: "Learn advanced concepts", done: false },
+            { id: "t1", title: "Learn advanced concepts", done: true },
             { id: "t2", title: "Learn the basics", done: false },
         ],
-        progress: 20, // Percentage
     },
     {
         id: "p2",
@@ -22,7 +33,6 @@ export const initialProjects = [
             { id: "t3", title: "Use Context", done: false },
             { id: "t4", title: "Optimize performance", done: false },
         ],
-        progress: 0,
     },
     {
         id: "p3",
@@ -30,12 +40,11 @@ export const initialProjects = [
         createdAt: "2024-12-29",
         deadline: "2025-01-15",
         description:
-            "Learn React from the group up. Start with the basics, finish with advanced knowledge.",
+            "Learn Vietnamese from the ground up. Start with the basics, finish with advanced knowledge.",
         tasks: [
-            { id: "t1", title: "Learn advanced concepts", done: false },
-            { id: "t2", title: "Learn the basics", done: false },
+            { id: "t5", title: "Learn pronunciation", done: false },
+            { id: "t6", title: "Practice daily conversation", done: false },
         ],
-        progress: 20, // Percentage
     },
     {
         id: "p4",
@@ -43,11 +52,10 @@ export const initialProjects = [
         createdAt: "2024-12-29",
         deadline: "2025-01-15",
         description:
-            "Learn React from the group up. Start with the basics, finish with advanced knowledge.",
+            "Learn Chinese from the ground up. Start with the basics, finish with advanced knowledge.",
         tasks: [
-            { id: "t1", title: "Learn advanced concepts", done: false },
-            { id: "t2", title: "Learn the basics", done: false },
+            { id: "t7", title: "Learn Pinyin", done: false },
+            { id: "t8", title: "Practice characters", done: false },
         ],
-        progress: 20, // Percentage
     },
 ];
