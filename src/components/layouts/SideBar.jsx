@@ -17,8 +17,7 @@ export default function Sidebar({
                 bg-gray-900 text-white p-4 overflow-y-auto
                 ${isSidebarOpen ? "block" : "hidden"}
                 md:block
-        `}
-            >
+            `}>
                 <div className="grid grid-cols-[auto_auto] justify-center items-center gap-2 mb-4">
                     <h2 className="text-xl font-bold">YOUR PROJECTS</h2>
                     <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -28,6 +27,7 @@ export default function Sidebar({
 
                 <AddButton tittle={"+ add project"} onClick={onAddProject} />
 
+                {/* // *! BUG */}
                 <ul className="space-y-2">
                     {projects.map((project) => (
                         <li

@@ -1,4 +1,9 @@
-export default function TaskItem({ taskItem, handleClearTask, handleToggleTaskDone }) {
+export default function TaskItem({
+    projectId,
+    taskItem,
+    handleClearTask,
+    handleToggleTaskDone
+}) {
     return (
         <>
             <li key={taskItem.id} className="flex justify-between items-center text-black">
@@ -7,7 +12,7 @@ export default function TaskItem({ taskItem, handleClearTask, handleToggleTaskDo
                     <input
                         type="checkbox"
                         checked={taskItem.done}
-                        onChange={() => handleToggleTaskDone(taskItem.id)} // bạn sẽ thêm hàm này
+                        onChange={() => handleToggleTaskDone(projectId, taskItem.id)} // bạn sẽ thêm hàm này
                         className="accent-blue-600"
                     />
                     <span className={taskItem.done ? "line-through text-gray-400" : ""}>
@@ -16,7 +21,9 @@ export default function TaskItem({ taskItem, handleClearTask, handleToggleTaskDo
                 </div>
 
                 <button
-                    onClick={() => handleClearTask(taskItem.id)}
+                    onClick={
+                        () => handleClearTask(projectId, taskItem.id)
+                    }
                     className="text-blue-500 hover:underline text-sm"
                 >
                     Clear

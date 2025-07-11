@@ -5,19 +5,27 @@ import ProgressBar from "../../components/ui/ProcessBar";
 import AddTaskForm from "../task/components/AddTaskForm";
 import { calculateProgress } from "../../assets/asset"
 
+
 export default function MainContentSection({
-    selectedProject,
-    handleDeleteProject, handleAddTask,
-    handleClearTask, handleToggleTaskDone
+    selectedProject, addTask,
+    clearTask, toggleTaskDone, deleteProject
 }) {
-    const [process, setProcess] = useState();
+    // Khai báo state `process` để lưu giá trị phần trăm hoàn thành
+    const [process, setProcess] = useState(0);
 
     useEffect(() => {
+        // Chỉ chạy khi `selectedProject` thay đổi (thêm/xóa/sửa task hoặc chọn project khác)
         if (selectedProject?.tasks) {
-            console.log("Tasks:", selectedProject.tasks);
-            setProcess(calculateProgress(selectedProject.tasks));
+            // Tính toán tiến độ dựa trên mảng tasks của project hiện tại
+            const newProgress = calculateProgress(selectedProject.tasks);
+
+            // Cập nhật state `process` để ProgressBar render lại
+            setProcess(newProgress);
         }
-    }, [selectedProject]); // ✅ chỉ phụ thuộc vào selectedProject
+    }, [
+        // Chỉ quan sát `selectedProject` (khi object này đổi reference)
+        selectedProject
+    ]);
 
     return (
         <>
@@ -27,13 +35,21 @@ export default function MainContentSection({
                     (
                         <div className="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
                             {/* Project Header */}
-                            <ProjectHeader selectedProject={selectedProject} handleDeleteProject={handleDeleteProject} />
+                            <ProjectHeader
+                                selectedProject={selectedProject}
+                                handleDeleteProject={deleteProject}
+                            />
 
                             {/* Tasks Section */}
-                            <AddTaskForm projectId={selectedProject.id} onAdd={handleAddTask} />
+                            <AddTaskForm projectId={selectedProject.id} onAdd={addTask} />
 
                             {/*Tasks List */}
-                            <TaskList taskList={selectedProject.tasks} handleClearTask={handleClearTask} handleToggleTaskDone={handleToggleTaskDone} />
+                            <TaskList
+                                projectId={selectedProject.id}
+                                taskList={selectedProject.tasks}
+                                handleClearTask={clearTask}
+                                handleToggleTaskDone={toggleTaskDone}
+                            />
 
                             {/* Progress Bar */}
                             <ProgressBar progress={process} />
